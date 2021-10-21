@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int mh(TreeNode *root){
+        if(root==NULL)
+            return 0;
+        return 1+max(mh(root->left),mh(root->right));
+    }
+    int de(TreeNode *root){
+        if(root==NULL)
+            return 0;
+        int lh,rh;
+        lh=mh(root->left);
+        rh=mh(root->right);
+        int ld,rd;
+        ld=de(root->left);
+        rd=de(root->right);
+        return max(lh+rh,max(ld,rd));
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        return de(root);
+    }
+};
